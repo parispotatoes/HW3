@@ -10,7 +10,7 @@
 import csv
 
 # Set path for file
-csvpath = "hw/HW3/03-Python/Starter_Code/PyBank/Resources/budget_data.csv"
+csvpath = "Submission/PyBank/Resources/budget_data.csv"
 
 # A defining moment in a variable's life
 months = 0
@@ -33,7 +33,7 @@ with open(csvpath, encoding='UTF-8') as csvfile:
 		print(row)
 		
 		# Step 1: count total number of months in dataset
-		months = months + 1
+		months += 1
 
 		# Step 2: total sun of profit and loss
 		total_profit = total_profit + int(row[1])
@@ -71,4 +71,16 @@ with open(csvpath, encoding='UTF-8') as csvfile:
 	min_change = min(changes)
 	min_month_index = changes.index(min_change)
 	min_month = month_changes[min_month_index]
-	# still need: keep track of the monoth's of the changes as an empty list; in our "else" we need to append the month as well, then grab the max of "changes", then call months.index to grab the month of the change (which we need to do for max and min) 
+	
+	output = f"""
+Financial Analysis
+----------------------------
+Total Months: {months}
+Total: ${total_profit}
+Average Change: ${round(ave_change, 2)}
+Greatest Increase in Profits: {max_month} (${max_change})
+Greatest Decrease in Profits: {min_month} (${min_change})"""
+	print(output)
+
+	with(open("output_PyBank.txt", 'w') as f): 
+		f.write(output)
